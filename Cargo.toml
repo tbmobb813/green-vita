@@ -41,8 +41,12 @@ assets = "static"
 # Size/speed tuning for a 512 MB device with no room to spare. `panic = "abort"` is
 # deliberately not set here: the video/catalog/RTC worker threads use `catch_unwind`
 # to survive a single decode/parse panic without taking down the process, which
-# requires the default unwind panic strategy.
+# requires the default unwind panic strategy. `strip = "symbols"` is also deliberately
+# not set: cargo-vita's `vita-elf-create` step needs the ELF symbol table to build the
+# velf, so stripping it here breaks the final link (`vita-gcc` rejects `-Wl,--strip-all`).
+# Use `strip_symbols = true` under `[package.metadata.vita.release]` instead if
+# post-link stripping of the velf is wanted.
 [profile.release]
 lto = "thin"
 codegen-units = 1
-strip = "symbols"
+strip = "debuginfo"
