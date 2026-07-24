@@ -84,6 +84,12 @@ cargo +nightly install cargo-vita
 See the official [`cargo-vita` documentation](https://github.com/vita-rust/cargo-vita)
 for its complete command reference.
 
+`cargo-vita` itself just needs some nightly to install with. Building GreenVita
+is separate and pins its own exact nightly via
+[`rust-toolchain.toml`](rust-toolchain.toml) - rustup installs that specific
+toolchain automatically the first time you build, no manual toolchain
+selection needed for that step.
+
 ### 3. Build the VPK
 
 From the GreenVita repository:
@@ -104,14 +110,14 @@ target/armv7-sony-vita-newlibeabihf/release/green-vita.vpk
 Unix-like shell:
 
 ```sh
-RUSTFLAGS="-C target-feature=-neon" cargo +nightly vita build vpk --release
+RUSTFLAGS="-C target-feature=-neon" cargo vita build vpk --release
 ```
 
 Windows PowerShell:
 
 ```powershell
 $env:RUSTFLAGS = "-C target-feature=-neon"
-cargo +nightly vita build vpk --release
+cargo vita build vpk --release
 ```
 
 The repository contains platform wrappers under [`tools/`](tools/) so Cargo can
