@@ -26,11 +26,23 @@ uuid = { version = "1", features = ["v4", "serde"] }
 vita-newlib-shims = "0.3"
 vitasdk-sys = { version = "0.3", features = ["SceAppUtil_stub", "SceKernelDmacMgr_stub", "SceKernelThreadMgr_stub", "SceLibKernel_stub", "SceVideodec_stub", "SceSysmem_stub", "SceSysmodule_stub"] }
 
+# Pinned to commit SHAs rather than branches: both are mutable refs on forks we don't
+# control, so a branch pin would let an upstream force-push or new commit silently
+# change what gets built.
 [patch.crates-io]
-ring = { git = "https://github.com/vita-rust/ring.git", branch = "v0.17.14-vita" }
-rtc-shared = { git = "https://github.com/Day-OS/rtc.git", branch = "vita" }
+ring = { git = "https://github.com/vita-rust/ring.git", rev = "502a916e86dce91ffa9ad96ef62a6e9fc6f96755" }
+rtc-shared = { git = "https://github.com/Day-OS/rtc.git", rev = "8a407b3d99757016792c5979fcda4a90ac1485f5" }
 
 [package.metadata.vita]
 title_id = "GREENVITA"
 title_name = "GreenVita"
 assets = "static"
+
+# Size/speed tuning for a 512 MB device with no room to spare. `panic = "abort"` is
+# deliberately not set here: the video/catalog/RTC worker threads use `catch_unwind`
+# to survive a single decode/parse panic without taking down the process, which
+# requires the default unwind panic strategy.
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "symbols"
