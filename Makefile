@@ -1,7 +1,9 @@
 .PHONY: vpk eboot upload-vpk update-run-vita run-vita
 
 RUSTFLAGS ?= -C target-feature=-neon
-CARGO_VITA ?= cargo +nightly vita
+# No `+nightly` override: rust-toolchain.toml pins the exact nightly, and an explicit
+# `+toolchain` here would take precedence over that file and defeat the pin.
+CARGO_VITA ?= cargo vita
 VPK := target/armv7-sony-vita-newlibeabihf/release/green-vita.vpk
 VITA_UPLOAD_DIR ?= ux0:/data/
 
