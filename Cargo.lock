@@ -1846,7 +1846,7 @@ dependencies = [
 [[package]]
 name = "ring"
 version = "0.17.14"
-source = "git+https://github.com/vita-rust/ring.git?branch=v0.17.14-vita#502a916e86dce91ffa9ad96ef62a6e9fc6f96755"
+source = "git+https://github.com/vita-rust/ring.git?rev=502a916e86dce91ffa9ad96ef62a6e9fc6f96755#502a916e86dce91ffa9ad96ef62a6e9fc6f96755"
 dependencies = [
  "cc",
  "cfg-if",
@@ -2093,7 +2093,7 @@ dependencies = [
 [[package]]
 name = "rtc-shared"
 version = "0.20.0-rc.2"
-source = "git+https://github.com/Day-OS/rtc.git?branch=vita#8a407b3d99757016792c5979fcda4a90ac1485f5"
+source = "git+https://github.com/Day-OS/rtc.git?rev=8a407b3d99757016792c5979fcda4a90ac1485f5#8a407b3d99757016792c5979fcda4a90ac1485f5"
 dependencies = [
  "aes",
  "aes-gcm",
