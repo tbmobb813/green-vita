@@ -26,6 +26,11 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Print toolchain versions
+        run: |
+          rustup show
+          rustc --version --verbose
+
       - name: Read release version
         id: version
         shell: bash
